@@ -1,0 +1,27 @@
+name: beye_group
+description: "A new Flutter project."
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+dependencies:
+  flutter:
+    sdk: flutter
+  syncfusion_flutter_datagrid: ^27.1.58
+  get: ^4.6.6
+  flutter_screenutil: ^5.9.3
+  fl_chart: ^0.69.0
+  flutter_svg: ^2.0.11
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/json_data.json
+    - assets/icons/
