@@ -109,7 +109,7 @@ class LoanChart extends StatelessWidget {
                               titlesData: const FlTitlesData(show: false),
                               borderData: FlBorderData(
                                 show: false,
-                                border: Border.all(color: Colors.black12),
+                                border: Border.all(color: AppColors.black),
                               ),
                             ),
                           ),
@@ -159,7 +159,7 @@ class LoanChart extends StatelessWidget {
             ),
             Container(
               width: Get.width,
-              height: 10,
+              height: 10.h,
               decoration: BoxDecoration(
                 color: color,
                 borderRadius: BorderRadius.only(

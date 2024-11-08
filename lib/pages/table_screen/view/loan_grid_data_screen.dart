@@ -4,6 +4,7 @@ import 'package:beye_group/pages/table_screen/source/loan_data_source.dart';
 import 'package:beye_group/pages/table_screen/widgets/kpi_column.dart';
 import 'package:beye_group/singletons/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -19,7 +20,7 @@ class LoanDataGridScreen extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: Obx(() {
           if (loanController.columns.isEmpty || loanController.rows.isEmpty) {
             return const Center(child: CircularProgressIndicator());
@@ -28,6 +29,7 @@ class LoanDataGridScreen extends StatelessWidget {
           return ListView(
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   KpiColumn(
                     initialInvisibleKpi:
@@ -91,9 +93,9 @@ class LoanDataGridScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10.h),
               ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                borderRadius: BorderRadius.all(Radius.circular(10.r)),
                 child: SfDataGrid(
                   allowFiltering: true,
                   source: LoanDataSource(
@@ -101,24 +103,24 @@ class LoanDataGridScreen extends StatelessWidget {
                   columns: [
                     GridColumn(
                       allowFiltering: false,
-                      minimumWidth: 10,
-                      maximumWidth: 50,
+                      minimumWidth: 10.w,
+                      maximumWidth: 50.w,
                       columnName: 'index',
                       label: GestureDetector(
                         onTap: () {
                           loanController.sortColumn('index');
                         },
                         child: Container(
-                          padding: const EdgeInsets.all(8),
+                          padding: EdgeInsets.all(8.r),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: AppColors.primaryDarkBlue,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(10),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10.r),
                               topRight: Radius.zero,
                             ),
-                            border:
-                                Border.all(color: AppColors.white, width: 0.5),
+                            border: Border.all(
+                                color: AppColors.white, width: 0.5.w),
                           ),
                           child: const Text(
                             '#',
@@ -138,12 +140,12 @@ class LoanDataGridScreen extends StatelessWidget {
                             loanController.sortColumn(column['name']);
                           },
                           child: Container(
-                            padding: const EdgeInsets.all(8),
+                            padding: EdgeInsets.all(8.r),
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
                               color: AppColors.primaryDarkBlue,
                               border: Border.all(
-                                  color: AppColors.white, width: 0.5),
+                                  color: AppColors.white, width: 0.5.w),
                             ),
                             child: Text(
                               column['title'],
