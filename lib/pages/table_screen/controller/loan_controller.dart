@@ -1,6 +1,9 @@
+import 'package:beye_group/pages/table_screen/widgets/loan_chart.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class LoanController extends GetxController {
   var columns = <Map<String, dynamic>>[].obs;
@@ -58,7 +61,7 @@ class LoanController extends GetxController {
       final List<Map<String, dynamic>> data =
           List<Map<String, dynamic>>.from(jsonData);
 
-      kpiData.clear(); // Clear any existing data to avoid conflict
+      kpiData.clear();
 
       var targetItems = data.where((item) => item["componentId"] == 3);
 
@@ -70,10 +73,19 @@ class LoanController extends GetxController {
           var current = kpi['current'];
           var dataPoints = kpi['data'];
 
+          List<ChartData> chartData = dataPoints.map<ChartData>((dataPoint) {
+            DateTime date =
+                DateFormat("M/d/yyyy h:mm:ss a").parse(dataPoint['date']);
+            double xValue = date.millisecondsSinceEpoch.toDouble();
+            double yValue = dataPoint['total'].toDouble();
+
+            return ChartData(xValue, yValue);
+          }).toList();
+
           kpiData.add({
             'kpiAlias': kpiAlias,
             'current': current,
-            'data': dataPoints,
+            'data': chartData,
           });
         }
       }

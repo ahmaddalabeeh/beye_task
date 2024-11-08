@@ -61,6 +61,7 @@ class KpiColumn extends StatelessWidget {
               visible: initialVisibleKpi,
               child: LoanChart(
                 currentText: currentFirstText,
+                kpiCardIndex: kpiFirstCardIndex,
                 kpiAliasText: kpiFirstAlias,
                 loanController: loanController,
                 color: colorFirst,
@@ -74,6 +75,7 @@ class KpiColumn extends StatelessWidget {
               visible: !initialVisibleKpi,
               child: LoanChart(
                 currentText: currentSecondText,
+                kpiCardIndex: kpiSecondCardIndex,
                 kpiAliasText: kpiSecondAlias,
                 loanController: loanController,
                 color: colorSecond,

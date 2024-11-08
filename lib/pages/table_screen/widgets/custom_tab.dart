@@ -34,10 +34,12 @@ class CustomTab extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            MainText(
-              text: title,
-              fontSize: 14,
-              color: AppColors.lightGrey,
+            Expanded(
+              child: MainText(
+                text: title,
+                fontSize: 14.spMin,
+                color: AppColors.lightGrey,
+              ),
             ),
             SvgPicture.asset(
               AppIcons.arrowDown,

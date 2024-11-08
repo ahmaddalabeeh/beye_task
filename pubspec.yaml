@@ -11,9 +11,9 @@ dependencies:
   syncfusion_flutter_datagrid: ^27.1.58
   get: ^4.6.6
   flutter_screenutil: ^5.9.3
-  fl_chart: ^0.69.0
   flutter_svg: ^2.0.11
   cupertino_icons: ^1.0.8
+  syncfusion_flutter_charts: ^27.1.58
 
 dev_dependencies:
   flutter_test:
