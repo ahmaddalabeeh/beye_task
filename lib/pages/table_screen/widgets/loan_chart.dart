@@ -59,7 +59,7 @@ class LoanChart extends StatelessWidget {
             ),
             Expanded(
               child: SfCartesianChart(
-                margin: EdgeInsets.zero,
+                margin: EdgeInsets.symmetric(horizontal: 1.w, vertical: 0.5.w),
                 plotAreaBorderWidth: 0,
                 primaryXAxis: const NumericAxis(
                   isVisible: false,
