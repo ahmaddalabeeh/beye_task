@@ -21,14 +21,14 @@ class LoanController extends GetxController {
   void toggleVisibleCharts(int index) {
     initialVisibleKpiCards[index] = false;
     initialInvisibleKpiCards[index] = true;
-    allChartsVisibility(index);
+    _allChartsVisibility(index);
     update();
   }
 
   void toggleHiddenCharts(int index) {
     initialVisibleKpiCards[index] = true;
     initialInvisibleKpiCards[index] = false;
-    allChartsVisibility(index);
+    _allChartsVisibility(index);
     update();
   }
 
@@ -38,7 +38,7 @@ class LoanController extends GetxController {
     update();
   }
 
-  void allChartsVisibility(int columnIndex) {
+  void _allChartsVisibility(int columnIndex) {
     chartVisibility[columnIndex] = true;
 
     update();
