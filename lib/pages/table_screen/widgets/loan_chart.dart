@@ -28,7 +28,7 @@ class LoanChart extends StatelessWidget {
     return Visibility(
       visible: visibility,
       child: Container(
-        height: 260.h,
+        height: MediaQuery.of(context).size.height * 0.3,
         margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
         decoration: BoxDecoration(
           color: AppColors.white,
@@ -88,7 +88,6 @@ class LoanChart extends StatelessWidget {
               ),
             ),
             Container(
-              width: double.infinity,
               height: 10.h,
               decoration: BoxDecoration(
                 color: color,

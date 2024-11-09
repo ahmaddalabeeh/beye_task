@@ -106,28 +106,23 @@ class LoanDataGridScreen extends StatelessWidget {
                       minimumWidth: 10.w,
                       maximumWidth: 50.w,
                       columnName: 'index',
-                      label: GestureDetector(
-                        onTap: () {
-                          loanController.sortColumn('index');
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(8.r),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: AppColors.primaryDarkBlue,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(10.r),
-                              topRight: Radius.zero,
-                            ),
-                            border: Border.all(
-                                color: AppColors.white, width: 0.5.w),
+                      label: Container(
+                        padding: EdgeInsets.all(8.r),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryDarkBlue,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10.r),
+                            topRight: Radius.zero,
                           ),
-                          child: const Text(
-                            '#',
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          border:
+                              Border.all(color: AppColors.white, width: 0.5.w),
+                        ),
+                        child: const Text(
+                          '#',
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),

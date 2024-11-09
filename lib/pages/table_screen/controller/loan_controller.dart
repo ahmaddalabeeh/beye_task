@@ -114,10 +114,20 @@ class LoanController extends GetxController {
       if (aValue == null) return isAscending.value ? -1 : 1;
       if (bValue == null) return isAscending.value ? 1 : -1;
 
-      if (isAscending.value) {
-        return aValue.compareTo(bValue);
+      bool isNumeric = (aValue is num) && (bValue is num);
+
+      if (isNumeric) {
+        if (isAscending.value) {
+          return aValue.compareTo(bValue);
+        } else {
+          return bValue.compareTo(aValue);
+        }
       } else {
-        return bValue.compareTo(aValue);
+        if (isAscending.value) {
+          return aValue.toString().compareTo(bValue.toString());
+        } else {
+          return bValue.toString().compareTo(aValue.toString());
+        }
       }
     });
   }
