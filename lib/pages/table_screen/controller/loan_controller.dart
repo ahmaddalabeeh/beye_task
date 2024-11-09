@@ -35,8 +35,13 @@ class LoanController extends GetxController {
           await rootBundle.loadString('assets/json_data.json');
       final List<dynamic> jsonData = json.decode(jsonString);
 
-      final List<Map<String, dynamic>> data =
-          List<Map<String, dynamic>>.from(jsonData);
+      final List<Map<String, dynamic>> data = jsonData.map((item) {
+        if (item is Map<String, dynamic>) {
+          return item;
+        } else {
+          return Map<String, dynamic>.from(item);
+        }
+      }).toList();
 
       var targetItems = data.where((item) => item["componentId"] == 9);
 

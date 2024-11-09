@@ -1,4 +1,5 @@
 import 'package:beye_group/helpers/helpers.dart';
+import 'package:beye_group/shared/widgets/main_text.dart';
 import 'package:beye_group/singletons/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -14,17 +15,25 @@ class LoanDataSource extends DataGridSource {
 
           return DataGridRow(
             cells: [
-              DataGridCell(
+              DataGridCell<int>(
                 columnName: '#',
                 value: index + 1,
               ),
               ...columns.map<DataGridCell>((column) {
                 final columnName = column['name'];
                 final rawValue = row[columnName] ?? '';
-                return DataGridCell(
-                  columnName: columnName,
-                  value: Helpers().formatNumber(rawValue),
-                );
+
+                if (rawValue is num) {
+                  return DataGridCell<String>(
+                    columnName: columnName,
+                    value: Helpers().formatNumber(rawValue.toDouble()),
+                  );
+                } else {
+                  return DataGridCell<String>(
+                    columnName: columnName,
+                    value: rawValue.toString(),
+                  );
+                }
               }),
             ],
           );
@@ -44,12 +53,11 @@ class LoanDataSource extends DataGridSource {
             border: Border.all(color: AppColors.grey, width: 0.1),
             color: AppColors.white,
           ),
-          child: Text(
-            cell.value.toString(),
-            style: const TextStyle(color: AppColors.black),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-          ),
+          child: MainText(
+              text: cell.value.toString(),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              color: AppColors.black),
         );
       }).toList(),
     );
