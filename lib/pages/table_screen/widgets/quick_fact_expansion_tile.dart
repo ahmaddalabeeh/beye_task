@@ -11,13 +11,15 @@ class QuickFactExpansionTile extends StatelessWidget {
   final int initialVisibilityCardIndex;
   final int kpiFirstCardIndex;
   final int kpiSecondCardIndex;
+  final int columnIndex;
   const QuickFactExpansionTile(
       {super.key,
       required this.loanController,
       required this.quickFactIndex,
       required this.initialVisibilityCardIndex,
       required this.kpiFirstCardIndex,
-      required this.kpiSecondCardIndex});
+      required this.kpiSecondCardIndex,
+      required this.columnIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,9 @@ class QuickFactExpansionTile extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 4.w),
         child: ExpansionTile(
           dense: true,
+          onExpansionChanged: (val) {
+            loanController.toggleChartsVisibility(columnIndex);
+          },
           tilePadding: EdgeInsets.symmetric(horizontal: 1.7.w),
           collapsedIconColor: AppColors.lightGrey,
           shape: RoundedRectangleBorder(

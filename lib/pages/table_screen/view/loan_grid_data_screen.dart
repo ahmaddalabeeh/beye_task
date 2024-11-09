@@ -32,6 +32,7 @@ class LoanDataGridScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   KpiColumn(
+                    columnIndex: 0,
                     initialInvisibleKpi:
                         loanController.initialInvisibleKpiCards[0],
                     initialVisibleKpi: loanController.initialVisibleKpiCards[0],
@@ -52,6 +53,7 @@ class LoanDataGridScreen extends StatelessWidget {
                     kpiSecondCardIndex: 1,
                   ),
                   KpiColumn(
+                    columnIndex: 1,
                     initialInvisibleKpi:
                         loanController.initialInvisibleKpiCards[1],
                     initialVisibleKpi: loanController.initialVisibleKpiCards[1],
@@ -72,6 +74,7 @@ class LoanDataGridScreen extends StatelessWidget {
                     kpiSecondCardIndex: 3,
                   ),
                   KpiColumn(
+                    columnIndex: 2,
                     initialInvisibleKpi:
                         loanController.initialInvisibleKpiCards[2],
                     initialVisibleKpi: loanController.initialVisibleKpiCards[2],

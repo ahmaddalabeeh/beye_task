@@ -22,7 +22,7 @@ class CustomTab extends StatelessWidget {
       splashColor: Colors.transparent,
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0.r),
         margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
         decoration: BoxDecoration(
           color: AppColors.white,

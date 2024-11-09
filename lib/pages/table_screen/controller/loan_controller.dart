@@ -1,11 +1,14 @@
-import 'package:beye_group/pages/table_screen/widgets/loan_chart.dart';
-import 'package:get/get.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
+
+import 'package:beye_group/pages/table_screen/widgets/loan_chart.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class LoanController extends GetxController {
+  RxList<bool> chartVisibility = [true, true, true].obs;
+
   var columns = <Map<String, dynamic>>[].obs;
   var rows = <Map<String, dynamic>>[].obs;
   var kpiData = <Map<String, dynamic>>[].obs;
@@ -18,13 +21,25 @@ class LoanController extends GetxController {
   void toggleVisibleCharts(int index) {
     initialVisibleKpiCards[index] = false;
     initialInvisibleKpiCards[index] = true;
-
+    allChartsVisibility(index);
     update();
   }
 
   void toggleHiddenCharts(int index) {
     initialVisibleKpiCards[index] = true;
     initialInvisibleKpiCards[index] = false;
+    allChartsVisibility(index);
+    update();
+  }
+
+  void toggleChartsVisibility(int columnIndex) {
+    chartVisibility[columnIndex] = !chartVisibility[columnIndex];
+
+    update();
+  }
+
+  void allChartsVisibility(int columnIndex) {
+    chartVisibility[columnIndex] = true;
 
     update();
   }

@@ -3,6 +3,7 @@ import 'package:beye_group/pages/table_screen/widgets/custom_tab.dart';
 import 'package:beye_group/pages/table_screen/widgets/loan_chart.dart';
 import 'package:beye_group/pages/table_screen/widgets/quick_fact_expansion_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 class KpiColumn extends StatelessWidget {
   final bool initialInvisibleKpi;
@@ -20,6 +21,7 @@ class KpiColumn extends StatelessWidget {
   final int initialVisibilityCardIndex;
   final int kpiFirstCardIndex;
   final int kpiSecondCardIndex;
+  final int columnIndex;
 
   const KpiColumn({
     super.key,
@@ -38,6 +40,7 @@ class KpiColumn extends StatelessWidget {
     required this.initialVisibilityCardIndex,
     required this.kpiFirstCardIndex,
     required this.kpiSecondCardIndex,
+    required this.columnIndex,
   });
 
   @override
@@ -45,57 +48,91 @@ class KpiColumn extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-          Visibility(
-            visible: initialInvisibleKpi,
-            child: AnimatedSize(
-              duration: const Duration(milliseconds: 500),
+          AnimatedOpacity(
+            duration: const Duration(milliseconds: 500),
+            opacity: loanController.chartVisibility[columnIndex] ||
+                    !initialInvisibleKpi
+                ? 1.0
+                : 0.0,
+            child: Visibility(
+              visible: loanController.initialVisibleKpiCards[columnIndex]
+                  ? false
+                  : initialInvisibleKpi,
+              child: AnimatedSize(
+                duration: const Duration(milliseconds: 500),
+                child: CustomTab(
+                  title: kpiFirstAlias,
+                  onTap: () => onFirstTabTap(),
+                ),
+              ),
+            ),
+          ),
+          Obx(() => AnimatedOpacity(
+                duration: const Duration(milliseconds: 500),
+                opacity: loanController.chartVisibility[columnIndex] &&
+                        initialVisibleKpi
+                    ? 1.0
+                    : 0.0,
+                child: Visibility(
+                  visible: loanController.chartVisibility[columnIndex] &&
+                      initialVisibleKpi,
+                  child: AnimatedSize(
+                    duration: const Duration(milliseconds: 500),
+                    child: LoanChart(
+                      currentText: currentFirstText,
+                      kpiCardIndex: kpiFirstCardIndex,
+                      kpiAliasText: kpiFirstAlias,
+                      loanController: loanController,
+                      color: colorFirst,
+                      visibility: initialVisibleKpi,
+                    ),
+                  ),
+                ),
+              )),
+          Obx(() => AnimatedOpacity(
+                duration: const Duration(milliseconds: 500),
+                opacity: loanController.chartVisibility[columnIndex] &&
+                        !initialVisibleKpi
+                    ? 1.0
+                    : 0.0,
+                child: Visibility(
+                  visible: loanController.chartVisibility[columnIndex] &&
+                      !initialVisibleKpi,
+                  child: AnimatedSize(
+                    duration: const Duration(milliseconds: 500),
+                    child: LoanChart(
+                      currentText: currentSecondText,
+                      kpiCardIndex: kpiSecondCardIndex,
+                      kpiAliasText: kpiSecondAlias,
+                      loanController: loanController,
+                      color: colorSecond,
+                      visibility: !initialVisibleKpi,
+                    ),
+                  ),
+                ),
+              )),
+          AnimatedOpacity(
+            duration: const Duration(milliseconds: 500),
+            opacity: !initialInvisibleKpi ? 1.0 : 0.0,
+            child: Visibility(
+              visible: !initialInvisibleKpi,
               child: CustomTab(
-                title: kpiFirstAlias,
-                onTap: () => onFirstTabTap(),
+                title: kpiSecondAlias,
+                onTap: () => onSecondTabTap(),
               ),
             ),
           ),
-          AnimatedSize(
-            duration: const Duration(milliseconds: 500),
-            child: Visibility(
-              visible: initialVisibleKpi,
-              child: LoanChart(
-                currentText: currentFirstText,
-                kpiCardIndex: kpiFirstCardIndex,
-                kpiAliasText: kpiFirstAlias,
-                loanController: loanController,
-                color: colorFirst,
-                visibility: initialVisibleKpi,
-              ),
+          AnimatedOpacity(
+            duration: const Duration(milliseconds: 900),
+            opacity: 1.0,
+            child: QuickFactExpansionTile(
+              loanController: loanController,
+              quickFactIndex: quickFactIndex,
+              initialVisibilityCardIndex: initialVisibilityCardIndex,
+              kpiFirstCardIndex: kpiFirstCardIndex,
+              kpiSecondCardIndex: kpiSecondCardIndex,
+              columnIndex: columnIndex,
             ),
-          ),
-          AnimatedSize(
-            duration: const Duration(milliseconds: 500),
-            child: Visibility(
-              visible: !initialVisibleKpi,
-              child: LoanChart(
-                currentText: currentSecondText,
-                kpiCardIndex: kpiSecondCardIndex,
-                kpiAliasText: kpiSecondAlias,
-                loanController: loanController,
-                color: colorSecond,
-                visibility: !initialVisibleKpi,
-              ),
-            ),
-          ),
-          Visibility(
-            visible: !initialInvisibleKpi,
-            child: CustomTab(
-              title: kpiSecondAlias,
-              onTap: () => onSecondTabTap(),
-            ),
-          ),
-          QuickFactExpansionTile(
-            loanController: loanController,
-            quickFactIndex: quickFactIndex,
-            initialVisibilityCardIndex: initialVisibilityCardIndex,
-            kpiFirstCardIndex: kpiFirstCardIndex,
-            kpiSecondCardIndex: kpiSecondCardIndex,
           ),
         ],
       ),
